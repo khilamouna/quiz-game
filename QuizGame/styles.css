@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+#question {
+  margin-bottom: 10px;
+}
+
+#choices {
+  margin-bottom: 20px;
+}
+
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#score {
+  font-weight: bold;
+  margin-top: 20px;
+}
+.correct-answer {
+  background-color: green;
+  color: white;
+}
+
+.incorrect-answer {
+  background-color: red;
+  color: white;
+}
