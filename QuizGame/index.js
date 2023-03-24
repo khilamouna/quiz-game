@@ -28,6 +28,7 @@ var questions = [
 
 var currentQuestion = 0;
 var score = 0;
+
 $(document).ready(function () {
   function displayQuestion() {
     var question = questions[currentQuestion];
@@ -41,6 +42,9 @@ $(document).ready(function () {
       button.attr("data-index", i);
       $("#choices").append(button);
     }
+
+    $("#choices button").removeClass("correct-answer incorrect-answer");
+    $("#feedback").removeClass("correct incorrect").text("");
   }
 
   function displayAnswer() {
@@ -52,14 +56,20 @@ $(document).ready(function () {
     } else {
       message += " You didn't pass the quiz, try again later.";
     }
+
     $("#theQuestion").text(message);
     $("#choices").empty();
+    $("#feedback").text("");
   }
 
   function checkAnswer() {
     var question = questions[currentQuestion];
     var userAnswer = $(this).attr("data-index");
-    if (userAnswer == question.correctAnswer) {
+    var isCorrect = userAnswer == question.correctAnswer;
+    $(this).toggleClass("correct-answer", isCorrect);
+    $(this).toggleClass("incorrect-answer", !isCorrect);
+
+    if (isCorrect) {
       score++;
       $("#score").text("Score: " + score);
       $("#feedback")
@@ -73,18 +83,17 @@ $(document).ready(function () {
         .addClass("incorrect");
     }
 
-    $(this).addClass(
-      userAnswer == question.correctAnswer
-        ? "correct-answer"
-        : "incorrect-answer"
-    );
-    $(this).siblings().removeClass("correct-answer incorrect-answer");
+    $("#choices button").attr("disabled", true);
 
     currentQuestion++;
     if (currentQuestion < questions.length) {
-      displayQuestion();
+      setTimeout(function () {
+        displayQuestion();
+      }, 2000);
     } else {
-      displayAnswer();
+      setTimeout(function () {
+        displayAnswer();
+      }, 2000);
     }
   }
 
