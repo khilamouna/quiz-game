@@ -73,7 +73,6 @@ $(document).ready(function () {
         .addClass("incorrect");
     }
 
-    // toggle color classes on selected answer button
     $(this).addClass(
       userAnswer == question.correctAnswer
         ? "correct-answer"
